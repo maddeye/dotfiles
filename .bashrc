@@ -120,4 +120,3 @@ if [ -t 1 ]; then
   exec zsh
 fi
 
-alias config='/usr/bin/git --git-dir=/home/maddeye/.cfg/ --work-tree=/home/maddeye'
