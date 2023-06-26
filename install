@@ -5,7 +5,7 @@
 set -o errexit -o nounset
 
 WORKDIR="$HOME"
-PV="2.1.0"
+PV="3.0.2"
 # Check deps
 
 if ! hash git 2>/dev/null ; then
@@ -72,6 +72,7 @@ grab_fonts() {
   (cd "$DIR_FONT" \
     && install_font "Iosevka-$PV" "Iosevka-$PV.zip" "https://github.com/ryanoasis/nerd-fonts/releases/download/v$PV/Iosevka.zip" \
     && install_font "SpaceMono-$PV" "SpaceMono-$PV.zip" "https://github.com/ryanoasis/nerd-fonts/releases/download/v$PV/SpaceMono.zip" \
+    && install_font "JetBrainsMono-$PV" "JetBrainsMono-$PV" "https://github.com/ryanoasis/nerd-fonts/releases/download/v$PV/JetBrainsMono.zip"
     && install_font cyberpunk "cyberpunk.zip" "https://dl.dafont.com/dl/?f=cyberpunks"
   )
 
