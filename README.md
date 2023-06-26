@@ -1,5 +1,7 @@
 # Setup
 
+Install [GNU Stow](https://www.gnu.org/software/stow/) and follow the instructions.
+
 ### Shell
 
 You can install [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh) and [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt) with:
