@@ -89,6 +89,10 @@ grab_fonts() {
   fc-cache -vf $DIR_FONT
 }
 
+install_brew() {
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+}
+
 usage() {
     printf "%s\n" \
       "-z, --zsh     Download and install dependencies of zsh"
@@ -114,11 +118,17 @@ fi
 # Options
 ZSH=false
 FONT=false
+BREW=false
 
 while [ "$#" -gt 0 ] ; do
   case "$1" in
     -d | --dest)
       WORKDIR="$2"
+      shift
+      shift
+      ;;
+    -b | --brew)
+      BREW=true 
       shift
       shift
       ;;
@@ -145,6 +155,7 @@ done
 main() {
   "$ZSH" && forZsh
   "$FONT" && grab_fonts
+  "$BREW" && install_brew
   echo "[+] Bye"
 }
 
