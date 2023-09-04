@@ -65,7 +65,7 @@ export STARSHIP_DISTRO="$ICON"
 
 # ----------------------------------------------------
 
-alias v="vim"
+alias v="nvim"
 
 if [ $(command -v nvim) ]; then
   export EDITOR=$(which nvim)
@@ -102,6 +102,47 @@ if [ -f "$HOME/.local/.bash_aliases" ] ; then
   source "$HOME/.local/.bash_aliases"
 fi
 
+
+
+
+# Docker on mac 
+docker-start() {
+  # Check if homebrew is installed
+  if [ ! command -v brew &> /dev/null ] ; then
+    echo "Installing homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi 
+
+  # check if minikube is installed 
+  if [ ! command -v minikube &> /dev/null ] ; then
+    echo "Installing minikube..."
+    brew install minikube
+  fi 
+
+  if [ ! command -v hyperkit &> /dev/null ] ; then
+    echo "Installing hyperkit..."
+    brew install hyperkit 
+  fi 
+
+  if [ ! command -v docker &> /dev/null ] ; then
+    echo "Installing docker..."
+    brew install docker docker-compose
+  fi
+
+  #Start minikube
+  minikube start 
+
+  # Tell Docker CLI to talk to minikube's VM 
+  eval $(minikube docker-env)
+
+  # Save IP to a hostname
+  echo "`minikube ip` docker.local" | sudo tee -a /etc/hosts > /dev/null
+}
+
+docker-stop() {
+  minikube stop
+}
+
 # Starship
 if [ $(command -v starship) ]; then
   eval "$(starship init zsh)"
@@ -114,7 +155,6 @@ fi
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
 
 # Neofetch
 neofetch --ascii "$HOME/.config/neofetch/ascii.txt"
