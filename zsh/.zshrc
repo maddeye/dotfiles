@@ -103,8 +103,6 @@ if [ -f "$HOME/.local/.bash_aliases" ] ; then
 fi
 
 
-
-
 # Docker on mac 
 docker-start() {
   # Check if homebrew is installed
@@ -114,14 +112,9 @@ docker-start() {
   fi 
 
   # check if minikube is installed 
-  if [ ! command -v minikube &> /dev/null ] ; then
-    echo "Installing minikube..."
-    brew install minikube
-  fi 
-
-  if [ ! command -v hyperkit &> /dev/null ] ; then
-    echo "Installing hyperkit..."
-    brew install hyperkit 
+  if [ ! command -v colima &> /dev/null ] ; then
+    echo "Installing colima..."
+    brew install colima
   fi 
 
   if [ ! command -v docker &> /dev/null ] ; then
@@ -129,18 +122,12 @@ docker-start() {
     brew install docker docker-compose
   fi
 
-  #Start minikube
-  minikube start 
-
-  # Tell Docker CLI to talk to minikube's VM 
-  eval $(minikube docker-env)
-
-  # Save IP to a hostname
-  echo "`minikube ip` docker.local" | sudo tee -a /etc/hosts > /dev/null
+  #Start colima
+  colima start 
 }
 
 docker-stop() {
-  minikube stop
+  colima stop
 }
 
 # Starship
@@ -158,3 +145,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 # Neofetch
 neofetch --ascii "$HOME/.config/neofetch/ascii.txt"
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
