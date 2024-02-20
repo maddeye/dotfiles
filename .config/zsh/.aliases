@@ -1,0 +1,17 @@
+#!/bin/zsh
+
+# Mask built-ins with better defaults
+alias vi="nvim"
+
+# More ls
+alias ll="ls -lh"
+alias la="ls -lAh"
+alias ldot="ls -ld .*"
+
+# Typos
+alias cd..="cd .."
+
+# Misc
+alias please="sudo"
+alias zshrc="${EDITOR:-vim} ${ZDOTDIR}/.zshrc"
+alias reload="source '$ZDOTDIR/.zshrc'"

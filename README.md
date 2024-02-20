@@ -1,16 +1,17 @@
-# Setup
+# MaddEye's Dotfiles
 
-Install [GNU Stow](https://www.gnu.org/software/stow/) and follow the instructions.
+These are my personal dotfiles. Use on your own risk.
 
-### Shell
+## Requirements
 
-You can install [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh) and [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt) with:
+- bash
+- git
 
-    ./install --zsh
-    stow zsh
+## Setup
 
-### Fonts
+```terminal
+git clone git@github.com:mathiasbynens/dotfiles.git && cd dotfiles && bash scripts/bootstrap.sh
+stow .
+```
 
-To install all the fonts (in `~/.local/share/fonts`), you can use my script too.
-
-    ./install --fonts
+For more information watch [this](https://www.youtube.com/watch?v=y6XCebnB9gs)

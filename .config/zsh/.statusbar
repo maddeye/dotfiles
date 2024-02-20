@@ -1,0 +1,66 @@
+# Custom statusbar for zsh
+
+zmodload zsh/terminfo
+autoload -Uz add-zsh-hook
+
+#Git status and zsh hooks
+git_status() {
+  GIT_BRANCH="$(git branch --show-current)"
+
+  if [[ -n $(git status --porcelain) ]]; then 
+    GIT_DIRTY="%F{yellow}*"
+  fi
+}
+
+get_git_prompt() {
+  git rev-parse --is-inside-work-tree &> /dev/null || return 0
+
+  git_status
+  print -nP "[$GIT_DIRTY$GIT_BRANCH%f]"
+}
+
+# Render statusbar
+statusbar() {
+  local LAST_EXIT_CODE=$?
+
+  echoti sc       # Save cursor position
+  echoti home     # Move cursor to top left of window
+
+  # Diamond gets red if last exit code is not 0
+  DIAMOND=""
+  if [[ $LAST_EXIT_CODE -ne 0 ]]; then
+    DIAMOND="%F{red}"
+  fi
+  DIAMOND="$DIAMOND %f %n"
+
+  print -nP "$DIAMOND $(get_git_prompt) %f"
+
+  echoti el       # Clear to endf of line
+  echoti rc       # Restore cursor position
+}
+
+add-zsh-hook precmd statusbar # Call before each new prompt
+
+# Custom clear function to preserve statusbar on clear
+function clear-scrollback-buffer {
+  # Behavior of clear: 
+  # 1. clear scrollback if E3 cap is supported (terminal, platform specific)
+  # 2. then clear visible screen
+  # For some terminal 'e[3J' need to be sent explicitly to clear scrollback
+  clear && printf '\e[3J'
+
+  # Run statusbar
+  statusbar
+  echo "\n"
+
+  # .reset-prompt: bypass the zsh-syntax-highlighting wrapper
+  # https://github.com/sorin-ionescu/prezto/issues/1026
+  # https://github.com/zsh-users/zsh-autosuggestions/issues/107#issuecomment-183824034
+  # -R: redisplay the prompt to avoid old prompts being eaten up
+  # https://github.com/Powerlevel9k/powerlevel9k/pull/1176#discussion_r299303453
+  #zle && zle .reset-prompt && zle -R
+  zle && zle .reset-prompt && zle -R
+}
+
+zle -N clear-scrollback-buffer
+bindkey '^L' clear-scrollback-buffer

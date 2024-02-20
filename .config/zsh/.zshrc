@@ -1,0 +1,55 @@
+# Enable colors
+autoload -U colors && colors
+
+# History
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.cache/zsh/history
+
+# Basic auto/tab completion
+autoload -U compinit
+zstyle ":completion:*" menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)           # Include hidden files
+
+# Autoload functions
+ZFUNCDIR=${ZFUNCDIR:-$ZDOTDIR/functions}
+fpath=($ZFUNCDIR $fpath)
+autoload -Uz $fpath[1]/*(.:t)
+
+# Use lf to switch directories and bind it to ctrl-o
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+bindkey -s '^o' 'lfcd\n'
+
+# Fuzzyfind
+bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
+
+# Edit line in vim with ctrl-e:
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+
+# Load aliases and shortcuts if existent.
+[ -f "$ZDOTDIR/.shortcuts" ] && source "$ZDOTDIR/.shortcuts"
+[ -f "$ZDOTDIR/.aliases" ] && source "$ZDOTDIR/.aliases"
+
+# Pre CMD
+precmd () { }
+
+# Custom Statusbar
+[ -f "$ZDOTDIR/.statusbar" ] && source "$ZDOTDIR/.statusbar"
+
+# Plugins should be last
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Change prompt
+set -o promptsubst
+PS1="%(?..%F{red}%B[%?%\]%b )%~ > %(%f)"
