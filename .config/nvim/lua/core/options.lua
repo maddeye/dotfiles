@@ -1,6 +1,7 @@
 local opt = vim.opt
 
 opt.termguicolors = true
+opt.guifont = "JetBrainsMono Nerd Font Mono"
 
 opt.ignorecase = true
 opt.smartcase = true
@@ -12,9 +13,9 @@ opt.backspace = "indent,eol,start"
 opt.number = true
 opt.relativenumber = true
 
-vim.scriptencoding = 'utf-8'
-opt.encoding = 'utf-8'
-opt.fileencoding = 'utf-8'
+vim.scriptencoding = "utf-8"
+opt.encoding = "utf-8"
+opt.fileencoding = "utf-8"
 
 opt.tabstop = 2
 opt.softtabstop = 2
@@ -31,7 +32,7 @@ opt.updatetime = 50
 opt.scrolloff = 8
 opt.sidescrolloff = 8
 
-opt.clipboard:append('unnamedplus')
+opt.clipboard:append("unnamedplus")
 
 opt.splitright = true
 opt.splitbelow = true
@@ -50,12 +51,12 @@ opt.updatetime = 50
 vim.g.mapleader = " "
 
 -- Highlight yank
-vim.api.nvim_create_autocmd('TextYankPost', {
-  pattern = '*',
-  callback = function()
-    vim.highlight.on_yank({
-      higroup = 'IncSearch',
-      timeout = 300,
-    })
-  end,
+vim.api.nvim_create_autocmd("TextYankPost", {
+	pattern = "*",
+	callback = function()
+		vim.highlight.on_yank({
+			higroup = "IncSearch",
+			timeout = 300,
+		})
+	end,
 })

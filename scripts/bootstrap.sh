@@ -63,4 +63,4 @@ install neovim
 install lf
 install fzf
 install neofetch
-
+install atuin

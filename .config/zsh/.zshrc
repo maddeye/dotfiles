@@ -33,6 +33,9 @@ bindkey -s '^o' 'lfcd\n'
 # Fuzzyfind
 bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
 
+# History Search
+# bindkey "^r" history-incremental-search-backward
+
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
@@ -53,3 +56,5 @@ source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Change prompt
 set -o promptsubst
 PS1="%(?..%F{red}%B[%?%\]%b )%~ > %(%f)"
+
+eval "$(atuin init zsh)"
