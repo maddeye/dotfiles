@@ -32,7 +32,8 @@ opt.updatetime = 50
 opt.scrolloff = 8
 opt.sidescrolloff = 8
 
-opt.clipboard:append("unnamedplus")
+--opt.clipboard:append("unnamedplus")
+opt.clipboard = "unnamedplus"
 
 opt.splitright = true
 opt.splitbelow = true

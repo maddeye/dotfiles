@@ -62,5 +62,8 @@ install npm
 install neovim
 install lf
 install fzf
-install neofetch
+install fd
+#install neofetch
 install atuin
+
+echo "Remember to install fastfetch"

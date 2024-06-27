@@ -24,6 +24,7 @@ export PAGER="${PAGER:-less}"
 # Paths
 #
 
+
 # No duplicates
 typeset -gU path fpath
 

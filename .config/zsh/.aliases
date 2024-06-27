@@ -2,8 +2,10 @@
 
 # Mask built-ins with better defaults
 alias vi="nvim"
+alias vim="nvim"
 
 # More ls
+alias ls="ls --color"
 alias ll="ls -lh"
 alias la="ls -lAh"
 alias ldot="ls -ld .*"
@@ -15,3 +17,5 @@ alias cd..="cd .."
 alias please="sudo"
 alias zshrc="${EDITOR:-vim} ${ZDOTDIR}/.zshrc"
 alias reload="source '$ZDOTDIR/.zshrc'"
+alias download="curl -k -O -L"
+alias v="fdfind --type f --hidden --exclude .git | fzf | xargs nvim"
