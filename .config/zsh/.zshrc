@@ -81,6 +81,12 @@ bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
 # Path
 export PATH="$PATH:$HOME/bin"
 
+# NVM
+if [ -d "$HOME/.nvm" ]; then
+  export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+fi
+
 # Shell integrations
 eval "$(fzf --zsh)"
 

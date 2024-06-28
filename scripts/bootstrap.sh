@@ -59,11 +59,13 @@ install gcc
 install zsh
 install nodejs
 install npm
-install neovim
+#install neovim
 install lf
 install fzf
 install fd
 #install neofetch
-install atuin
+#install atuin
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
 echo "Remember to install fastfetch"
