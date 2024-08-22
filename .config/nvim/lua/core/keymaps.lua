@@ -50,5 +50,10 @@ keymap.set("n", "<leader>tp", ":tabp<CR>") -- previous tab
 --maxizer
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>")
 
+--diagnostic
+keymap.set("n", "[se", vim.diagnostic.open_float) -- show diagnostics for line
+keymap.set("n", "[p", vim.diagnostic.goto_prev) -- jump to previous diagnostic in buffer
+keymap.set("n", "[n", vim.diagnostic.goto_next) -- jump to next diagnostic in buffer
+
 -- replacements
 keymap.set("n", "<leader>ri", ":%s/\/<CR>")
