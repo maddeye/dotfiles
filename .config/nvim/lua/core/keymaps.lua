@@ -11,6 +11,10 @@ keymap.set("n", "<leader>nh", ":nohl<CR>")
 -- Quicksave
 keymap.set("i", "<C-s>", "<ESC><CMD>:w<CR>")
 
+-- Move text up and down
+keymap.set("n", "<A-k>", "<Esc>:m -2<CR>")
+keymap.set("n", "<A-j>", "<Esc>:m +1<CR>")
+
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
@@ -34,6 +38,10 @@ keymap.set("n", "<leader>sv", "<C-w>v") -- split vertically
 keymap.set("n", "<leader>sh", "<C-w>s") -- split horizontally
 keymap.set("n", "<leader>se", "<C-w>=") -- make split windows equal width
 keymap.set("n", "<leader>sx", ":close<CR>") -- close current split window
+keymap.set("n", "<leader>ss", ":vertical resize -5<CR>") -- decrease window size
+keymap.set("n", "<leader>sg", ":vertical resize +5<CR>") -- increase window size
+keymap.set("n", "<leader>ssh", ":horizontal resize -5<CR>") -- decrease window height
+keymap.set("n", "<leader>sgh", ":horizontal resize +5<CR>") -- increase window height
 
 -- window navigation
 keymap.set("n", "<leader>mh", "<C-w>h")
