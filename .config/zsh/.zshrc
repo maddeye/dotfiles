@@ -78,6 +78,16 @@ bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
 [ -f "$ZDOTDIR/.aliases" ] && source "$ZDOTDIR/.aliases"
 
 
+# X Server for WSL
+#export DISPLAY=$(ip route|awk '/^default/{print $3}'):0
+#export LIBGL_ALWAYS_INDIRECT=true
+
+# NVM 
+if [ -d "$HOME/.nvm" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+fi
+
 # Path
 export PATH="$PATH:$HOME/bin"
 
