@@ -1,7 +1,7 @@
 local opt = vim.opt
 
 opt.termguicolors = true
-opt.guifont = "JetBrainsMono Nerd Font Mono"
+--opt.guifont = "JetBrainsMono Nerd Font Mono"
 
 opt.ignorecase = true
 opt.smartcase = true
@@ -49,15 +49,19 @@ opt.isfname:append("@-@")
 
 opt.updatetime = 50
 
-vim.g.mapleader = " "
-
 -- Highlight yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-	pattern = "*",
-	callback = function()
-		vim.highlight.on_yank({
-			higroup = "IncSearch",
-			timeout = 300,
-		})
-	end,
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank({
+      higroup = "IncSearch",
+      timeout = 300,
+    })
+  end,
+})
+
+-- Remove trailing space on write
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "*" },
+  command = [[%s/\s\+$//e]],
 })
