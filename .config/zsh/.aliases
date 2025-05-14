@@ -24,3 +24,6 @@ alias v="fdfind --type f --hidden --exclude .git | fzf | xargs nvim"
 alias k="kubectl"
 alias kn="kubectl config set-context --current --namespace "
 alias kns="kubectl config view --minify | grep namespace"
+
+# WSL2
+alias fixwsl="sudo rm -r /tmp/.X11-unix && ln -s /mnt/wslg/.X11-unix /tmp/.X11-unix"
