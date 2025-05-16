@@ -79,10 +79,12 @@ bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
 
 
 # X Server for WSL
-#export DISPLAY=$(ip route|awk '/^default/{print $3}'):0
-#export LIBGL_ALWAYS_INDIRECT=true
+if [[ $(grep -i Microsoft /proc/version) ]]; then
+  export DISPLAY=$(ip route|awk '/^default/{print $3}'):0
+  export LIBGL_ALWAYS_INDIRECT=true
+fi
 
-# NVM 
+# NVM
 if [ -d "$HOME/.nvm" ]; then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
